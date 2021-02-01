@@ -30,7 +30,6 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', 
     level=logging.INFO,
     filename='notify_me.log',
-    encoding='utf-8'
 )
 
 logger = logging.getLogger(__name__)
