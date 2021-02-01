@@ -1,7 +1,4 @@
-#!/usr/bin/env python
-# pylint: disable=W0613, C0116
-# type: ignore[union-attr]
-# This program is dedicated to the public domain under the CC0 license.
+#!/usr/bin/env python3
 
 """
 Simple Bot to reply to Telegram messages.
