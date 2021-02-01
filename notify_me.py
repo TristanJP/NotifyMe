@@ -33,16 +33,16 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # The API Key we received for our bot
-with open("telegram_legacy_bot.conf") as config_file:
+with open("telegram_legacy_bot.conf", "r") as config_file:
     config = json.load(config_file)
+
     API_KEY = config.get("API_KEY", None)
     if API_KEY is None:
         logger.info("API KEY not found!")
 
-eden_pages = {
-    "101": 'https://www.edenperfumes.co.uk/shop/aftershaves/best-selling/388-101-fierceness-woody-aromatic-men-s',
-    "172": 'https://www.edenperfumes.co.uk/shop/aftershaves/orient/140-no-172-amber-pour-homme-oriental-fougere-men-s'
-}
+    eden_pages = config.get("eden_pages", None)
+    if eden_pages is None:
+        logger.info("No Eden webpages known.")
 
 
 # Define a few command handlers. These usually take the two arguments update and
@@ -85,8 +85,10 @@ def check(update: Update, context: CallbackContext) -> None:
     in_stock_text = f"Eden {number} "
     if in_stock:
         in_stock_text += "is in Stock!"
-    else:
+    elif not in_stock:
         in_stock_text += "is NOT in Stock."
+    else:
+        in_stock += "is not known."
 
     logger.info(f"{in_stock}: {in_stock_text}")
     update.message.reply_text(in_stock_text)
