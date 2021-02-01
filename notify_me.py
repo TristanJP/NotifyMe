@@ -83,12 +83,12 @@ def check(update: Update, context: CallbackContext) -> None:
     in_stock = eden_in_stock(number)
 
     in_stock_text = f"Eden {number} "
-    if in_stock:
-        in_stock_text += "is in Stock!"
-    elif not in_stock:
-        in_stock_text += "is NOT in Stock."
-    else:
+    if in_stock is None:
         in_stock += "is not known."
+    elif in_stock:
+        in_stock_text += "is in Stock!"
+    else:
+        in_stock_text += "is NOT in Stock."
 
     logger.info(f"{in_stock}: {in_stock_text}")
     update.message.reply_text(in_stock_text)
