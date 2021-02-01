@@ -84,7 +84,7 @@ def check(update: Update, context: CallbackContext) -> None:
 
     in_stock_text = f"Eden {number} "
     if in_stock is None:
-        in_stock += "is not known."
+        in_stock_text += "is not known."
     elif in_stock:
         in_stock_text += "is in Stock!"
     else:
