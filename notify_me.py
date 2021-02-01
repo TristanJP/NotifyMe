@@ -14,6 +14,7 @@ Press Ctrl-C on the command line or send a signal to the process to stop the
 bot.
 """
 
+import json
 import logging
 import re
 import requests
@@ -32,7 +33,11 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # The API Key we received for our bot
-API_KEY = ""
+with open("telegram_legacy_bot.conf") as config_file:
+    config = json.load(config_file)
+    API_KEY = config.get("API_KEY", None)
+    if API_KEY is None:
+        logger.info("API KEY not found!")
 
 eden_pages = {
     "101": 'https://www.edenperfumes.co.uk/shop/aftershaves/best-selling/388-101-fierceness-woody-aromatic-men-s',
